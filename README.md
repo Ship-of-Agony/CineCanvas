@@ -11,16 +11,23 @@
 
 Eliminate black bars, scale videos dynamically without distortion, and enjoy hardware-accelerated ambient lighting with zero overhead.
 
+---
+
+<p align="center">
+  <img src="assets/main.png" alt="CineCanvas YouTube Ultrawide Main" width="75%" style="vertical-align: middle; margin: 6px;" />
+  <img src="assets/panel.png" alt="CineCanvas Settings Panel" width="19%" style="vertical-align: middle; margin: 6px;" />
+</p>
+
 </div>
 
 ---
 
 ## What's New in v0.3.2
 
-* **In-Player Sliders:** Added quick-access adjustment sliders (wing dimming, aura blur, edge blend, outer fade) directly into the on-screen player menu.
-* **Multi-Language Support:** Added localizations for English, German, Polish, Czech, French, Dutch, Italian, Spanish, Russian, and Portuguese.
-* **Code & Security:** Refactored DOM rendering to eliminate unsafe assignments and ensure full compliance with Mozilla's latest extension security policies.
-* **Performance:** Fine-tuned player controls, MutationObserver efficiency, and ambient aura canvas rendering.
+- **In-Player Sliders:** Added quick-access adjustment sliders (wing dimming, aura blur, edge blend, outer fade) directly into the on-screen player menu.
+- **Multi-Language Support:** Added localizations for English, German, Polish, Czech, French, Dutch, Italian, Spanish, Russian, and Portuguese.
+- **Code & Security:** Refactored DOM rendering to eliminate unsafe assignments and ensure full compliance with Mozilla's latest extension security policies.
+- **Performance:** Fine-tuned player controls, MutationObserver efficiency, and ambient aura canvas rendering.
 
 ---
 
@@ -33,25 +40,25 @@ Eliminate black bars, scale videos dynamically without distortion, and enjoy har
 ## Key Features
 
 ### Multiple Aspect Ratio Modes
-* **21:9 Crop:** Seamlessly zooms in to completely fill your 21:9 ultrawide display without distorting the picture.
-* **21:9 Stretch:** Expands 16:9 content horizontally to cover the full panel.
-* **Original (Off):** Leaves the native aspect ratio untouched.
+- **21:9 Crop:** Seamlessly zooms in to completely fill your 21:9 ultrawide display without distorting the picture.
+- **21:9 Stretch:** Expands 16:9 content horizontally to cover the full panel.
+- **Original (Off):** Leaves the native aspect ratio untouched.
 
 ### Live Video Ambilight & Illumination
-* **Soft Ambient Glow:** A milky, diffused background projection reflecting live video colors across the side areas.
-* **Vivid Ambilight:** Maximum luminance and saturated dynamic glow for complete visual immersion.
-* **Cinematic Shadow:** Subtle edge darkening with a smooth, atmospheric falloff.
-* **Soft Edge Feathering:** Retains full video sharpness while softly blending outer borders into the canvas—eliminating harsh cut-off edges.
+- **Soft Ambient Glow:** A milky, diffused background projection reflecting live video colors across the side areas.
+- **Vivid Ambilight:** Maximum luminance and saturated dynamic glow for complete visual immersion.
+- **Cinematic Shadow:** Subtle edge darkening with a smooth, atmospheric falloff.
+- **Soft Edge Feathering:** Retains full video sharpness while softly blending outer borders into the canvas—eliminating harsh cut-off edges.
 
 ### Smart Auto-Crop
-* Scans frames automatically for black letterbox and pillarbox bars (including hardcoded 4:3 bands in 16:9 containers) and adapts the scaling mode dynamically without manual intervention.
+- Scans frames automatically for black letterbox and pillarbox bars (including hardcoded 4:3 bands in 16:9 containers) and adapts the scaling mode dynamically without manual intervention.
 
 ### Branded Pillarbox Wings
-* When viewing in native aspect ratio, replace plain black side bars with subtle, copyright-free vector badges tailored to your streaming service.
-* Fully supports automatic Dark/Light theme switching and can be toggled on or off at any time.
+- When viewing in native aspect ratio, replace plain black side bars with subtle, copyright-free vector badges tailored to your streaming service.
+- Fully supports automatic Dark/Light theme switching and can be toggled on or off at any time.
 
 ### Universal Streaming Compatibility
-* Engineered with non-invasive display pipelines compatible with **YouTube**, and custom embedded HTML5 players.
+- Engineered with non-invasive display pipelines compatible with **YouTube**, and custom embedded HTML5 players.
 
 ---
 
@@ -72,9 +79,9 @@ Control playback enhancements instantly without opening the extension popup:
 
 ## Privacy & Security
 
-* **Zero Tracking:** No telemetry, analytics, cookies, or external network requests.
-* **100% Client-Side:** All color sampling, scaling transforms, and DOM adjustments execute entirely on your machine.
-* **Free & Open Source:** Licensed under the GNU General Public License v3.0.
+- **Zero Tracking:** No telemetry, analytics, cookies, or external network requests.
+- **100% Client-Side:** All color sampling, scaling transforms, and DOM adjustments execute entirely on your machine.
+- **Free & Open Source:** Licensed under the GNU General Public License v3.0.
 
 ---
 
