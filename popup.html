@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 285px;
+      margin: 0;
+      padding: 10px;
+      background: #141418;
+      color: #ddd;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+    }
+    .header {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .version-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: #0084ff;
+      background: rgba(0, 132, 255, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 132, 255, 0.3);
+    }
+    .view {
+      display: none;
+    }
+    .view.active {
+      display: block;
+    }
+    .site-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 6px 8px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .site-info {
+      display: flex;
+      flex-direction: column;
+      max-width: 190px;
+    }
+    .site-host {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0084ff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .site-status {
+      font-size: 10px;
+      color: #aaa;
+    }
+    .nav-btn {
+      width: 100%;
+      background: rgba(0, 132, 255, 0.15);
+      border: 1px solid rgba(0, 132, 255, 0.3);
+      color: #0084ff;
+      padding: 6px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 8px;
+      text-align: center;
+      transition: background 0.15s;
+    }
+    .nav-btn:hover {
+      background: rgba(0, 132, 255, 0.25);
+    }
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 2px;
+      margin-bottom: 4px;
+    }
+    .toggle-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .toggle-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .toggle-desc {
+      font-size: 10px;
+      color: #888;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 34px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #444;
+      transition: .2s;
+      border-radius: 18px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 12px;
+      width: 12px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #0084ff; }
+    input:checked + .slider:before { transform: translateX(16px); }
+
+    .slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 4px 2px;
+      margin-bottom: 4px;
+    }
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 600;
+      color: #ddd;
+    }
+    .slider-header span:last-child {
+      color: #0084ff;
+    }
+    .range-input {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: #333;
+      outline: none;
+      margin: 4px 0 2px 0;
+    }
+    .range-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #0084ff;
+      cursor: pointer;
+    }
+
+    .separator {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 6px 0;
+    }
+    .item {
+      padding: 5px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .item:hover { background: rgba(255, 255, 255, 0.1); }
+    .item.selected {
+      background: #0084ff;
+      color: #fff;
+    }
+    .title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .desc {
+      font-size: 10px;
+      opacity: 0.75;
+      margin-top: 1px;
+    }
+
+    /* List Editor View Styles */
+    .editor-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #bbb;
+      margin-bottom: 3px;
+      display: block;
+    }
+    .domain-input-row {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .domain-input {
+      flex: 1;
+      background: #1e1e24;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      color: #fff;
+      padding: 5px 6px;
+      font-size: 11px;
+      outline: none;
+    }
+    .domain-input:focus { border-color: #0084ff; }
+    .add-btn {
+      background: #0084ff;
+      color: #fff;
+      border: none;
+      padding: 0 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .add-btn.danger { background: #ef4444; }
+    .domain-list-container {
+      max-height: 90px;
+      overflow-y: auto;
+      background: #1a1a20;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      padding: 4px;
+      margin-bottom: 8px;
+    }
+    .domain-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 6px;
+      border-radius: 3px;
+      margin-bottom: 2px;
+      font-size: 11px;
+      font-family: monospace;
+      color: #eee;
+    }
+    .domain-del {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 12px;
+      padding: 0 4px;
+    }
+    .domain-del:hover { color: #ff6b6b; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span>CineCanvas</span>
+    <span class="version-tag">v0.3.2</span>
+  </div>
+
+  <!-- MAIN VIEW -->
+  <div id="mainView" class="view active">
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-title" id="lbl-autocrop">Auto-Erkennung</span>
+        <span class="toggle-desc" id="lbl-autocrop-desc">Balken automatisch wegschneiden</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="autoCropToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="site-card" id="siteCard">
+      <div class="site-info">
+        <span class="site-host" id="siteHost">youtube.com</span>
+        <span class="site-status" id="lblSiteStatus">Auf dieser Website aktiv</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="siteToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <button class="nav-btn" id="toFilterMenu">⚙️ Black- & Whitelist verwalten &gt;</button>
+    <button class="nav-btn" id="toReglerMenu" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #ddd;">🎨 Erweiterte Bild- & Ambilight-Regler &gt;</button>
+
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-title" id="lbl-brandwings">Flügel-Icons / Overlays</span>
+        <span class="toggle-desc" id="lbl-brandwings-desc">YouTube-Stil an den Seiten</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="brandWingsToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="item" data-mode="off">
+      <div class="title" id="t-off">Aus (Standard)</div>
+      <div class="desc" id="d-off">Originalformat</div>
+    </div>
+    <div class="item" data-mode="crop">
+      <div class="title" id="t-crop">21:9 Crop</div>
+      <div class="desc" id="d-crop">Zoom (schneidet Balken ab)</div>
+    </div>
+    <div class="item" data-mode="stretch">
+      <div class="title" id="t-stretch">21:9 Stretch</div>
+      <div class="desc" id="d-stretch">Horizontal auf 21:9 dehnen</div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="item" data-mode="shadow">
+      <div class="title" id="t-shadow">Cinematic Shadow</div>
+      <div class="desc" id="d-shadow">Sanfte Kanten & dezentes Licht</div>
+    </div>
+    <div class="item" data-mode="soft">
+      <div class="title" id="t-soft">Soft Ambient Glow</div>
+      <div class="desc" id="d-soft">Milchig-weiches Video-Ambilight</div>
+    </div>
+    <div class="item" data-mode="vivid">
+      <div class="title" id="t-vivid">Vivid Ambilight</div>
+      <div class="desc" id="d-vivid">Intensives Vollbild-Video-Ambilight</div>
+    </div>
+  </div>
+
+  <!-- REGLER UNTERMENÜ -->
+  <div id="reglerView" class="view">
+    <button class="nav-btn" id="backToMainFromRegler">&lt; Zurück zum Hauptmenü</button>
+    
+    <div class="slider-row">
+      <div class="slider-header">
+        <span id="lbl-wingdim">Hintergrund-Dimmung</span>
+        <span id="val-wingdim">70%</span>
+      </div>
+      <input type="range" min="0" max="100" value="70" class="range-input" id="wingDimRange">
+    </div>
+
+    <div class="slider-row">
+      <div class="slider-header">
+        <span id="lbl-aurablur">Hintergrund-Blur (Aura)</span>
+        <span id="val-aurablur">45px (Mittel)</span>
+      </div>
+      <input type="range" min="0" max="80" value="45" class="range-input" id="auraBlurRange">
+    </div>
+
+    <div class="slider-row">
+      <div class="slider-header">
+        <span id="lbl-edgeblend">Kanten-Einzug (Blend)</span>
+        <span id="val-edgeblend">0 (Harte Kante)</span>
+      </div>
+      <input type="range" min="0" max="50" value="0" class="range-input" id="edgeBlendRange">
+    </div>
+
+    <div class="slider-row">
+      <div class="slider-header">
+        <span id="lbl-outerfade">Außenrand-Fade</span>
+        <span id="val-outerfade">0% (Vollbild)</span>
+      </div>
+      <input type="range" min="0" max="100" value="0" class="range-input" id="outerFadeRange">
+    </div>
+  </div>
+
+  <!-- FILTER / LIST MANAGER VIEW -->
+  <div id="filterView" class="view">
+    <button class="nav-btn" id="backToMain">&lt; Zurück zum Hauptmenü</button>
+    <div style="font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 8px;">Black- & Whitelist Verwaltung</div>
+    
+    <label class="editor-label">Whitelist (Erlaubte Seiten):</label>
+    <div class="domain-input-row">
+      <input type="text" id="whitelistInput" class="domain-input" placeholder="z.B. youtube.com">
+      <button id="addWhitelistBtn" class="add-btn">+</button>
+    </div>
+    <div id="whitelistContainer" class="domain-list-container"></div>
+
+    <label class="editor-label" style="margin-top: 6px;">Blacklist (Blockierte Seiten):</label>
+    <div class="domain-input-row">
+      <input type="text" id="blacklistInput" class="domain-input" placeholder="z.B. beispiel.de">
+      <button id="addBlacklistBtn" class="add-btn danger">+</button>
+    </div>
+    <div id="blacklistContainer" class="domain-list-container"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
