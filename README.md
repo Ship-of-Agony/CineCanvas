@@ -2,14 +2,14 @@
 
 # CineCanvas
 
-**The ultimate 21:9 ultrawide media extension built exclusively for Mozilla Firefox.**
+**The ultimate 21:9 ultrawide media extension engineered exclusively for YouTube on Mozilla Firefox.**
 
-[![Version](https://img.shields.io/badge/version-0.3.2-blue.svg)](#whats-new-in-v032)
+[![Version](https://img.shields.io/badge/version-0.4.2-blue.svg)](#whats-new-in-v042)
 [![Platform](https://img.shields.io/badge/platform-Mozilla%20Firefox-orange.svg)](#installation)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Privacy](https://img.shields.io/badge/tracking-none-brightgreen.svg)](#privacy--security)
 
-Eliminate black bars, scale videos dynamically without distortion, and enjoy hardware-accelerated ambient lighting with zero overhead.
+Get the most out of your 21:9 ultrawide display on YouTube. CineCanvas delivers smart aspect ratio scaling, soft edge blending, live ambient glow, customizable side frames, and custom wallpapers. Eliminate black bars, scale videos dynamically without distortion, and enjoy hardware-accelerated ambient lighting with zero overhead.
 
 ---
 
@@ -22,10 +22,10 @@ Eliminate black bars, scale videos dynamically without distortion, and enjoy har
 
 ---
 
-## What's New in v0.3.2
+## What's New in v0.4.2
 
-- **In-Player Sliders:** Added quick-access adjustment sliders (wing dimming, aura blur, edge blend, outer fade) directly into the on-screen player menu.
-- **Multi-Language Support:** Added localizations for English, German, Polish, Czech, French, Dutch, Italian, Spanish, Russian, and Portuguese.
+- **In-Player Sliders:** Added quick-access adjustment sliders (wing dimming, aura blur, edge blend, outer fade) directly into the embedded on-screen player menu without needing to open the browser menu.
+- **Multi-Language Support:** Added automatic language detection with 10 fully localized languages (English, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Czech, and Russian). English serves as the default fallback.
 - **Code & Security:** Refactored DOM rendering to eliminate unsafe assignments and ensure full compliance with Mozilla's latest extension security policies.
 - **Performance:** Fine-tuned player controls, MutationObserver efficiency, and ambient aura canvas rendering.
 
@@ -33,60 +33,74 @@ Eliminate black bars, scale videos dynamically without distortion, and enjoy har
 
 ## Overview
 
-**CineCanvas** is engineered specifically for 21:9 ultrawide monitors running on Mozilla Firefox. Standard 16:9 videos and classic 4:3 content often leave massive pillarbox bars on the sides. CineCanvas restores full visual immersion through real-time aspect ratio fitting, smart letterbox detection, and customizable ambient light projection—processed entirely on your local GPU via hardware-accelerated transforms.
+**CineCanvas** is specifically designed and optimized for a flawless ultrawide viewing experience on YouTube. Standard 16:9 videos and classic 4:3 content often leave massive pillarbox bars on the sides. CineCanvas restores full visual immersion through real-time aspect ratio fitting, smart letterbox detection, and customizable ambient light projection — processed entirely on your local GPU via hardware-accelerated transforms. 
+
+Seamlessly works with standard YouTube desktop playback, theater mode, and full-screen view. Access all mode selections, toggles, and adjustment sliders straight from the embedded player button.
 
 ---
 
 ## Key Features
 
 ### Multiple Aspect Ratio Modes
-- **21:9 Crop:** Seamlessly zooms in to completely fill your 21:9 ultrawide display without distorting the picture.
-- **21:9 Stretch:** Expands 16:9 content horizontally to cover the full panel.
-- **Original (Off):** Leaves the native aspect ratio untouched.
+- **21:9 Crop:** Zooms seamlessly to completely fill your 21:9 ultrawide monitor without distorting the picture.
+- **21:9 Stretch:** Expands 16:9 videos horizontally to cover the entire panel.
+- **Original (Off):** Keeps native aspect ratios untouched.
 
 ### Live Video Ambilight & Illumination
-- **Soft Ambient Glow:** A milky, diffused background projection reflecting live video colors across the side areas.
-- **Vivid Ambilight:** Maximum luminance and saturated dynamic glow for complete visual immersion.
-- **Cinematic Shadow:** Subtle edge darkening with a smooth, atmospheric falloff.
-- **Soft Edge Feathering:** Retains full video sharpness while softly blending outer borders into the canvas—eliminating harsh cut-off edges.
+- **Vivid Ambilight:** Maximum luminance and rich, saturated dynamic glow for full ultrawide immersion.
+- **Soft Ambient Glow:** Milky, diffused background projection reflecting live colors across the side wings.
+- **Cinematic Shadow:** Subtle edge darkening paired with smooth ambient falloff.
+- **Granular Background Blur Slider:** Dedicated slider (0px to 80px) accessible directly in the player and popup, ranging from mirror-sharp reflections to deeply blurred velvety auras.
 
-### Smart Auto-Crop
-- Scans frames automatically for black letterbox and pillarbox bars (including hardcoded 4:3 bands in 16:9 containers) and adapts the scaling mode dynamically without manual intervention.
+### Advanced Edge Blending (GPU-Powered CSS Masking)
+- **Seamless Inward Fade:** Dedicated control (0 to 50) to soften harsh video borders. At 0, edges stay razor-sharp; higher values blend the video naturally into the ambient aura or background.
+- **Seamless Bezel Transition:** Smooth slider (0% to 100%) fading outer monitor edges into deep black for a clean transition into physical screen bezels.
+- **Zero Filter Bottlenecks:** Utilizes native linear gradient masks directly on the `<video>` element, avoiding expensive filter bottlenecks.
 
-### Branded Pillarbox Wings
-- When viewing in native aspect ratio, replace plain black side bars with subtle, copyright-free vector badges tailored to your streaming service.
-- Fully supports automatic Dark/Light theme switching and can be toggled on or off at any time.
+### Cinema Side Wings & Custom Frames
+- **Customizable Wings:** Replace plain black pillarbox bars with stylized official YouTube badges, pre-saved theater frames (Frame 1 to 5), or upload your own custom high-resolution wallpaper.
+- **Full Dimming Slider:** Adjust background brightness from 100% all the way down to true solid black (0%).
+- **Independent Presets & Profiles:** Slider values for static frames and dynamic Ambilight operate independently — fine-tuning one does not overwrite the other.
+- **Dynamic Theme Switching:** Supports automatic or manual Dark/Light mode switching.
 
-### Universal Streaming Compatibility
-- Engineered with non-invasive display pipelines compatible with **YouTube**, and custom embedded HTML5 players.
+### Smart Auto-Crop & Bar Detection
+- **Intelligent Scanning:** Scans for black letterbox and pillarbox bars (including hardcoded 4:3 content inside 16:9 containers) and adapts video scaling dynamically.
+- **Automatic Boundary Correction:** Automatically detects hardcoded black bars in 4:3 streams and positions the soft blend precisely where visible video begins.
 
 ---
 
 ## Keyboard Shortcuts & OSD
 
-Control playback enhancements instantly without opening the extension popup:
+Control playback enhancements instantly without opening the extension popup. Subtle HUD badges provide immediate visual feedback on keypresses.
 
 | Shortcut | Action |
 | :--- | :--- |
-| `Alt + C` | Cycle through video modes (Crop, Stretch, Ambilight, Off) |
+| `Alt + C` | Cycle through video and ambilight modes |
 | `Alt + W` | Toggle side wing overlays on/off |
 | `Alt + L` | Switch wing theme between Dark and Light mode |
-| `Alt + A` | Enable / disable automatic letterbox detection (Auto-Crop) |
-
-*All key actions display an instant, non-intrusive On-Screen Display (OSD) badge on the player.*
+| `Alt + A` | Enable or disable automatic letterbox detection (Auto-Crop) |
 
 ---
 
 ## Privacy & Security
 
-- **Zero Tracking:** No telemetry, analytics, cookies, or external network requests.
-- **100% Client-Side:** All color sampling, scaling transforms, and DOM adjustments execute entirely on your machine.
-- **Free & Open Source:** Licensed under the GNU General Public License v3.0.
+- **Completely Free:** No paywalls, no subscriptions, no ads.
+- **Zero Data Collection:** No analytics, no telemetry, no external server requests (`data_collection_permissions: none`).
+- **100% Local Processing:** Color extraction, canvas rendering, and custom background storage operate strictly client-side within your browser.
+
+This project is licensed under the GNU General Public License v3.0.
+
+---
+
+## Feature Requests & Feedback
+
+If you have requests for additional features or enhancements, please reach out via email to **ship.of.agony.labs@gmail.com**.
 
 ---
 
 ## Installation (Firefox Temporary Add-on)
 
-1. Clone or download this repository as a `.zip` file:
+1. Ddownload this repository:
+
    ```bash
-   git clone [https://github.com/Ship-of-Agony/CineCanvas.git](https://github.com/Ship-of-Agony/CineCanvas.git)
+   https://addons.mozilla.org/de/firefox/addon/cinecanvas/versions/
