@@ -88,7 +88,7 @@ If you have requests for additional features or enhancements, please reach out v
 
 ---
 
-## Installation (Firefox Temporary Add-on)
+## Installation Add-on (Firefox)
 
 1. Ddownload this repository:
 
