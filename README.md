@@ -11,16 +11,6 @@
 
 Get the most out of your 21:9 ultrawide display on YouTube. CineCanvas delivers smart aspect ratio scaling, soft edge blending, live ambient glow, customizable side frames, and custom wallpapers. Eliminate black bars, scale videos dynamically without distortion, and enjoy hardware-accelerated ambient lighting with zero overhead.
 
----
-
-<p align="center">
-  <img src="assets/main.png" alt="CineCanvas YouTube Ultrawide Main" width="75%" style="vertical-align: middle; margin: 6px;" />
-  <img src="assets/panel.png" alt="CineCanvas Settings Panel" width="19%" style="vertical-align: middle; margin: 6px;" />
-</p>
-
-</div>
-
----
 
 ## What's New in v0.4.2
 
