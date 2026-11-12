@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { width: 285px; margin: 0; padding: 10px; background: #141418; color: #ddd; font-family: sans-serif; user-select: none; }
+    .header { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); display: flex; justify-content: space-between; align-items: center; }
+    .version-tag { font-size: 10px; font-weight: 600; color: #0084ff; background: rgba(0, 132, 255, 0.15); padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(0, 132, 255, 0.3); }
+    .view { display: none; }
+    .view.active { display: block; }
+    
+    .theme-select-container { padding: 4px 2px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
+    .theme-select-title { font-size: 11px; font-weight: 600; color: #fff; }
+    .theme-select { background: #1e1e24; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 4px; color: #ffffff; padding: 4px; font-size: 11px; outline: none; width: 130px; }
+    
+    .custom-bg-row { display: none; justify-content: space-between; align-items: center; padding: 4px 2px; margin-bottom: 4px; }
+    .custom-bg-title { font-size: 11px; font-weight: 600; color: #ffffff !important; }
+    .btn-small { background: #333; border: 1px solid #555; color: #fff; padding: 3px 6px; border-radius: 4px; font-size: 10px; cursor: pointer; }
+    .btn-small.danger { color: #ff6b6b; border-color: rgba(255,107,107,0.3); }
+
+    .slider-row { display: flex; flex-direction: column; gap: 3px; padding: 4px 2px; margin-bottom: 4px; }
+    .slider-header { display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: #ddd; }
+    .slider-header span:last-child { color: #0084ff; }
+    .range-input { -webkit-appearance: none; width: 100%; height: 4px; border-radius: 2px; background: #333; outline: none; margin: 4px 0 2px 0; }
+    .range-input::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #0084ff; cursor: pointer; }
+
+    .separator { height: 1px; background: rgba(255, 255, 255, 0.1); margin: 6px 0; }
+    .item { padding: 5px 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s; }
+    .item:hover { background: rgba(255, 255, 255, 0.1); }
+    .item.selected { background: #0084ff; color: #fff; }
+    .title { font-size: 12px; font-weight: 600; }
+    .desc { font-size: 10px; opacity: 0.75; margin-top: 1px; }
+
+    .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 2px; margin-bottom: 4px; }
+    .toggle-info { display: flex; flex-direction: column; }
+    .toggle-title { font-size: 12px; font-weight: 600; color: #fff; }
+    .toggle-desc { font-size: 10px; color: #888; }
+    .switch { position: relative; display: inline-block; width: 34px; height: 18px; flex-shrink: 0; margin-left: 8px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; inset: 0; background-color: #444; transition: .2s; border-radius: 18px; }
+    .slider:before { position: absolute; content: ""; height: 12px; width: 12px; left: 3px; bottom: 3px; background-color: white; transition: .2s; border-radius: 50%; }
+    input:checked + .slider { background-color: #0084ff; }
+    input:checked + .slider:before { transform: translateX(16px); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span>CineCanvas</span>
+    <span class="version-tag">v0.4.2</span>
+  </div>
+
+  <div id="mainView" class="view active">
+    
+    <!-- Auto-Crop & Wings Toggles -->
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-title" id="lbl-autocrop">Auto-Erkennung</span>
+        <span class="toggle-desc" id="lbl-autocrop-desc">Balken automatisch wegschneiden</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="autoCropToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="toggle-row">
+      <div class="toggle-info">
+        <span class="toggle-title" id="lbl-brandwings">Kino-Seitenrahmen</span>
+        <span class="toggle-desc" id="lbl-brandwings-desc">Rahmen an den Seiten anzeigen</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="brandWingsToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+    
+    <div class="separator"></div>
+
+    <!-- Design & Custom Image -->
+    <div class="theme-select-container">
+      <span class="theme-select-title" id="lbl-framedata">Design auswählen:</span>
+      <select class="theme-select" id="frameSelect">
+        <option value="ambilight">Ambilight</option>
+        <option value="logo">YouTube Logo</option>
+        <option value="frame01">Frame 1</option>
+        <option value="frame02">Frame 2</option>
+        <option value="frame03">Frame 3</option>
+        <option value="frame04">Frame 4</option>
+        <option value="frame05">Frame 5</option>
+        <option value="frame06">Frame 6</option>
+        <option value="frame07">Frame 7</option>
+        <option value="frame08">Frame 8</option>
+        <option value="frame09">Frame 9</option>
+        <option value="frame10">Frame 10</option>
+        <option value="frame11">Frame 11</option>
+        <option value="frame12">Frame 12</option>
+        <option value="frame13">Frame 13</option>
+        <option value="frame14">Frame 14</option>
+        <option value="frame15">Frame 15</option>
+        <option value="frame16">Frame 16</option>
+        <option value="frame17">Frame 17</option>
+        <option value="frame18">Frame 18</option>
+        <option value="frame19">Frame 19</option>
+        <option value="frame20">Frame 20</option>
+        <option value="frame21">Frame 21</option>
+        <option value="frame22">Frame 22</option>
+        <option value="custom">Eigenes Bild...</option>
+      </select>
+    </div>
+    
+    <div class="custom-bg-row" id="customBgRow">
+      <span class="custom-bg-title" id="lbl-custombg">Eigenes Bild</span>
+      <div style="display: flex; gap: 4px;">
+        <input type="file" id="customBgInput" accept="image/*" style="display: none;">
+        <button class="btn-small" id="btnUploadBg">Wählen</button>
+        <button class="btn-small danger" id="btnClearBg">X</button>
+      </div>
+    </div>
+
+    <!-- Ambilight Submenu (Erscheint NUR wenn Ambilight gewählt ist) -->
+    <div id="ambientContainer" style="display: none; flex-direction: column; gap: 2px; margin: 4px 0; padding: 4px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px;">
+      <div style="font-size: 11px; font-weight: 600; color: #fff; padding: 2px 4px 4px 4px;" id="lbl-ambientsettings">Ambilight-Einstellungen</div>
+      <div class="item" data-mode="shadow"><div class="title" id="t-shadow">Cinematic Shadow</div><div class="desc" id="d-shadow">Sanfte Kanten & dezentes Licht</div></div>
+      <div class="item" data-mode="soft"><div class="title" id="t-soft">Soft Ambient Glow</div><div class="desc" id="d-soft">Milchig-weiches Video-Ambilight</div></div>
+      <div class="item" data-mode="vivid"><div class="title" id="t-vivid">Vivid Ambilight</div><div class="desc" id="d-vivid">Intensives Vollbild-Video-Ambilight</div></div>
+    </div>
+    
+    <div class="separator"></div>
+
+    <!-- Sliders -->
+    <div class="slider-row">
+      <div class="slider-header"><span id="lbl-wingdim">Hintergrund-Dimmung</span><span id="val-wingdim">70%</span></div>
+      <input type="range" min="0" max="100" value="70" class="range-input" id="wingDimRange">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span id="lbl-edgeblend">Weicher Video-Rand</span><span id="val-edgeblend">0</span></div>
+      <input type="range" min="0" max="50" value="0" class="range-input" id="edgeBlendRange">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span id="lbl-outerfade">Außenrand-Fade</span><span id="val-outerfade">0%</span></div>
+      <input type="range" min="0" max="100" value="0" class="range-input" id="outerFadeRange">
+    </div>
+    <div class="slider-row">
+      <div class="slider-header"><span id="lbl-aurablur">Hintergrund-Blur</span><span id="val-aurablur">45px</span></div>
+      <input type="range" min="0" max="80" value="45" class="range-input" id="auraBlurRange">
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Base Modes -->
+    <div class="item" data-mode="off"><div class="title" id="t-off">Aus (Standard)</div><div class="desc" id="d-off">Originalformat</div></div>
+    <div class="item" data-mode="crop"><div class="title" id="t-crop">21:9 Crop</div><div class="desc" id="d-crop">Zoom (schneidet Balken ab)</div></div>
+    <div class="item" data-mode="stretch"><div class="title" id="t-stretch">21:9 Stretch</div><div class="desc" id="d-stretch">Horizontal auf 21:9 dehnen</div></div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
