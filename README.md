@@ -84,13 +84,12 @@ This project is licensed under the GNU General Public License v3.0.
 
 ## Feature Requests & Feedback
 
-If you have requests for additional features or enhancements, please reach out via email to **ship.of.agony.labs@gmail.com**.
+If you have requests for additional features or enhancements, please reach out via email to **ship.of.agony.labs[at]gmail.com**.
 
 ---
 
 ## Installation Add-on (Firefox)
 
-1. Ddownload this repository:
+Download Add-On:
 
-   ```bash
-   https://addons.mozilla.org/de/firefox/addon/cinecanvas/versions/
+   **[CineCanvas](https://addons.mozilla.org/de/firefox/addon/cinecanvas/versions/)**
