@@ -1,10 +1,10 @@
 <div align="center">
 
-# CineCanvas
+# CineCanvas (YouTube)
 
 **The ultimate 21:9 ultrawide media extension engineered exclusively for YouTube on Mozilla Firefox.**
 
-[![Version](https://img.shields.io/badge/version-0.4.2-blue.svg)](#whats-new-in-v042)
+[![Version](https://img.shields.io/badge/version-0.4.3-blue.svg)](#whats-new-in-v042)
 [![Platform](https://img.shields.io/badge/platform-Mozilla%20Firefox-orange.svg)](#installation)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Privacy](https://img.shields.io/badge/tracking-none-brightgreen.svg)](#privacy--security)
@@ -12,12 +12,11 @@
 Get the most out of your 21:9 ultrawide display on YouTube. CineCanvas delivers smart aspect ratio scaling, soft edge blending, live ambient glow, customizable side frames, and custom wallpapers. Eliminate black bars, scale videos dynamically without distortion, and enjoy hardware-accelerated ambient lighting with zero overhead.
 
 
-## What's New in v0.4.2
+## What's New in v0.4.3
 
-- **In-Player Sliders:** Added quick-access adjustment sliders (wing dimming, aura blur, edge blend, outer fade) directly into the embedded on-screen player menu without needing to open the browser menu.
-- **Multi-Language Support:** Added automatic language detection with 10 fully localized languages (English, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Czech, and Russian). English serves as the default fallback.
-- **Code & Security:** Refactored DOM rendering to eliminate unsafe assignments and ensure full compliance with Mozilla's latest extension security policies.
-- **Performance:** Fine-tuned player controls, MutationObserver efficiency, and ambient aura canvas rendering.
+- Improved Format Detection: The pillarbox detection (black bars on the left/right) now checks three separate vertical zones (top, center, bottom) instead of a single point, allowing it to accurately distinguish genuine black bars from dark movie scenes.
+- Higher Tolerance for Dark Scenes: Switching to a 4:3 format now requires a significantly longer, uninterrupted detection period (approx. 4.5 seconds), completely eliminating false positives during dark sequences in 16:9 videos.
+- Strict Toggle Coupling: When the automatic detection is disabled in the menu, the script acts as an absolute fallback and will under no circumstances interfere with the video format or picture edges. Accidental cropping is now fully prevented.
 
 ---
 
