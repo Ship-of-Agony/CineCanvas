@@ -2,7 +2,7 @@
 
 # CineCanvas (YouTube)
 
-**The ultimate 21:9 ultrawide media extension engineered exclusively for YouTube on Mozilla Firefox.**
+**The ultimate 21:9 ultrawide media extension engineered for YouTube on Mozilla Firefox.**
 
 [![Version](https://img.shields.io/badge/version-0.4.3-blue.svg)](#whats-new-in-v042)
 [![Platform](https://img.shields.io/badge/platform-Mozilla%20Firefox-orange.svg)](#installation)
