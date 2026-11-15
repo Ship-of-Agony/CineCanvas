@@ -11,6 +11,10 @@
 
 Get the most out of your 21:9 ultrawide display on YouTube. CineCanvas delivers smart aspect ratio scaling, soft edge blending, live ambient glow, customizable side frames, and custom wallpapers. Eliminate black bars, scale videos dynamically without distortion, and enjoy hardware-accelerated ambient lighting with zero overhead.
 
+<div align="center">
+  <img src="Screenshot/Screen.jpg" alt="CineCanvas Screenshot" width="800">
+  <p><i>CineCanvas on 21:9 Screen</i></p>
+</div>
 
 ## What's New in v0.4.3
 
@@ -91,4 +95,6 @@ If you have requests for additional features or enhancements, please reach out v
 
 Download Add-On:
 
-   **[CineCanvas](https://addons.mozilla.org/de/firefox/addon/cinecanvas/versions/)**
+  Firefox Add-On **[CineCanvas](https://addons.mozilla.org/de/firefox/addon/cinecanvas/versions/)**,
+   or last Release on
+   Github **[CineCanvas](https://github.com/Ship-of-Agony/CineCanvas/releases)**
